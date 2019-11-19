@@ -1,8 +1,13 @@
-FROM grafana/grafana:4.4.2
+FROM grafana/grafana:6.4.1
 
-RUN apt-get update && apt-get install -y curl gettext-base && rm -rf /var/lib/apt/lists/*
+USER root
+
+RUN apk -get update \
+    && apk add gettext-base \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /etc/grafana
+
 COPY datasources ./datasources
 
 WORKDIR /app
